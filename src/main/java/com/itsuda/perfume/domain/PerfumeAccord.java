@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PerfumeNote {
+public class PerfumeAccord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,6 +20,6 @@ public class PerfumeNote {
     private Perfume perfume;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "note_id")
-    private Note note;
+    @JoinColumn(name = "accord_id")
+    private Accord accord;
 } 

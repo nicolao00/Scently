@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Note {
+public class Accord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,6 +21,6 @@ public class Note {
     
     // ------------------------ 관계 설정 ----------------------------
     
-    @OneToMany(mappedBy = "note")
-    private List<PerfumeNote> perfumeNotes = new ArrayList<>();
+    @OneToMany(mappedBy = "accord")
+    private List<PerfumeAccord> perfumeAccords = new ArrayList<>();
 } 

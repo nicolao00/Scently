@@ -19,6 +19,8 @@ public class Perfume {
     private Long id;
     
     private String name;
+
+    private String imageUri;
     
     @Enumerated(EnumType.STRING)
     private GenderType gender;
@@ -29,15 +31,16 @@ public class Perfume {
     
     private String potential;
     
-    @Enumerated(EnumType.STRING)
-    private Country country;
-    
     private String description; // 향 한줄 소개
     
     @Column(name = "registered_at")
     private LocalDate registeredAt;
 
     // ------------------------ 관계 설정 ----------------------------
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id")
+    private Country country;
     
     @OneToMany(mappedBy = "perfume")
     private List<Review> reviews = new ArrayList<>();
@@ -46,7 +49,7 @@ public class Perfume {
     private List<WishPerfume> wishPerfumes = new ArrayList<>();
     
     @OneToMany(mappedBy = "perfume")
-    private List<PerfumeNote> perfumeNotes = new ArrayList<>();
+    private List<PerfumeAccord> perfumeAccords = new ArrayList<>();
     
     @OneToMany(mappedBy = "perfume")
     private List<PerfumeVolume> perfumeVolumes = new ArrayList<>();
