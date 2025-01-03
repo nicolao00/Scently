@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.itsuda.perfume.domain.type.GenderType;
+import com.itsuda.perfume.domain.type.BrandType;
+import com.itsuda.perfume.domain.type.CountryType;
+import com.itsuda.perfume.domain.type.PotentialType;
 
 @Entity
 @Getter
@@ -25,9 +28,14 @@ public class Perfume {
     @Enumerated(EnumType.STRING)
     private GenderType gender;
     
-    private String brand;
+    @Enumerated(EnumType.STRING)
+    private BrandType brand;
     
-    private String potential;
+    @Enumerated(EnumType.STRING)
+    private CountryType country;
+    
+    @Enumerated(EnumType.STRING)
+    private PotentialType potential;
     
     private String description; // 향 한줄 소개
     
@@ -35,10 +43,6 @@ public class Perfume {
     private LocalDate registeredAt;
 
     // ------------------------ 관계 설정 ----------------------------
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "country_id")
-    private Country country;
     
     @OneToMany(mappedBy = "perfume")
     private List<Review> reviews = new ArrayList<>();
