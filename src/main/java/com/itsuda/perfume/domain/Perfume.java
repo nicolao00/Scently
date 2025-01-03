@@ -27,8 +27,6 @@ public class Perfume {
     
     private String brand;
     
-    private String price;
-    
     private String potential;
     
     private String description; // 향 한줄 소개
