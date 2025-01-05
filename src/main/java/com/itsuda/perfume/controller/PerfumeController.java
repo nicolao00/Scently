@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "Perfume", description = "향수 관련 API")
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PerfumeController {
     private final PerfumeService perfumeService;
 
+    @Operation(summary = "향수 목록 조회", description = "조건에 맞는 향수 목록을 조회합니다.")
     @GetMapping("")
     public ResponseDto<List<PerfumeListDto>> getPerfumes(@ModelAttribute PerfumeRequestDto perfumeRequestDto) {
         return new ResponseDto<>(perfumeService.getPerfumes(perfumeRequestDto));
