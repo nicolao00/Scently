@@ -6,7 +6,6 @@ import com.itsuda.perfume.domain.PerfumeDetail;
 import com.itsuda.perfume.domain.PerfumeVolume;
 import com.itsuda.perfume.dto.response.PerfumeAccordDto;
 import com.itsuda.perfume.dto.response.PerfumeDetailDto;
-import com.itsuda.perfume.dto.response.PerfumeVolumeDto;
 import com.itsuda.perfume.exception.ErrorCode;
 import com.itsuda.perfume.exception.RestApiException;
 import com.itsuda.perfume.repository.AccordRepository;

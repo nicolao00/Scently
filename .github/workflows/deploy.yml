@@ -5,33 +5,32 @@ on:
     branches:
       - dev
 
-jobs: 
+jobs:
   Deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: SSH(원격 접속)로 EC2에 접속하기
+      - name: SSH(원격 접속)으로 EC2에 접속하기
         uses: appleboy/ssh-action@v1.0.3  # Appleboy가 제공하는 SSH GitHub Action 사용
         env:
-          APPLICATION_PROPERTIES: ${{ secrets.APPLICATION_PROPERTIES }}
+          SPRING_PROFILE: ${{ secrets.SPRING_PROFILE }} # 활성화할 Spring Boot 프로파일
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
-          envs: APPLICATION_PROPERTIES
           script_stop: true
 
           script: |
             cd /home/ubuntu/Scently
 
-            rm -rf src/main/resources/application.yml
-
+            # 기존 소스 업데이트
             git pull origin dev
 
-            echo "$APPLICATION_PROPERTIES" > src/main/resources/application.yml
-
+            # Gradle Clean Build
             ./gradlew clean build
 
+            # 기존 애플리케이션 종료
             sudo fuser -k -n tcp 8080 || true
 
-            nohup java -jar build/libs/*SNAPSHOT.jar > ./output.log 2>&1 &
+            # Spring Boot 애플리케이션 실행 (SPRING_PROFILE 적용)
+            nohup java -jar -Dspring.profiles.active=${SPRING_PROFILE} build/libs/*SNAPSHOT.jar > ./output.log 2>&1 &

@@ -2,7 +2,6 @@ package com.itsuda.perfume.repository;
 
 import com.itsuda.perfume.domain.Accord;
 import com.itsuda.perfume.domain.Perfume;
-import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,0 +1,26 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${RDS_ENDPOINT}:3306/scently?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+        highlight_sql: true
+
+  logging.level:
+    # sql 출력
+    org.hibernate.SQL: debug
+    # sql 실행시 binding 되는 파라미터의 값이 ??로 뜨는데 그 값을 보여주는 옵션
+    org.hibernate.orm.jdbc.bind: trace #스프링 부트 3.x, hibernate6
