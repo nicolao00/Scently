@@ -1,13 +1,10 @@
 package com.itsuda.perfume.repository;
 
 import com.itsuda.perfume.domain.Perfume;
-import com.itsuda.perfume.domain.PerfumeVolume;
 import com.itsuda.perfume.domain.type.BrandType;
 import com.itsuda.perfume.domain.type.CountryType;
 import com.itsuda.perfume.domain.type.GenderType;
 import com.itsuda.perfume.domain.type.PotentialType;
-import com.itsuda.perfume.domain.PerfumeAccord;
-import com.itsuda.perfume.domain.Accord;
 
 import java.util.List;
 

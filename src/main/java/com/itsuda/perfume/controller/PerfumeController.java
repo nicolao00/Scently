@@ -2,6 +2,7 @@ package com.itsuda.perfume.controller;
 
 import com.itsuda.perfume.dto.request.PerfumeRequestDto;
 import com.itsuda.perfume.dto.response.PerfumeAccordDto;
+import com.itsuda.perfume.dto.response.PerfumeDetailDto;
 import com.itsuda.perfume.dto.response.PerfumeListDto;
 import com.itsuda.perfume.exception.ResponseDto;
 import com.itsuda.perfume.service.PerfumeService;
@@ -37,5 +38,11 @@ public class PerfumeController {
     @GetMapping("/accords")
     public ResponseDto<List<PerfumeAccordDto>> getAccords() {
         return new ResponseDto<>(perfumeService.getAccords());
+    }
+
+    @Operation(summary = "향수 상세 조회", description = "향수 상세 정보를 조회합니다.")
+    @GetMapping("/{perfumeId}")
+    public ResponseDto<PerfumeDetailDto> getPerfumeDetail(@RequestParam Long perfumeId) {
+        return new ResponseDto<>(perfumeService.getPerfumeDetail(perfumeId));
     }
 }
