@@ -54,8 +54,14 @@ public class PerfumeService {
     // 향수 상세 조회
     public PerfumeDetailDto getPerfumeDetail(Long perfumeId) {
         Perfume perfume = perfumeRepository.findById(perfumeId).orElseThrow(() -> new RestApiException(ErrorCode.NOT_FOUND_PERFUME));
-        List<PerfumeVolume> perfumeVolume = perfumeVolumeRepository.findByPerfume(perfume).orElseThrow(() -> new RestApiException(ErrorCode.NOT_FOUND_PERFUME_VOLUME));
-        List<Accord> accords = accordRepository.findAllByPerfume(perfume).orElseThrow(() -> new RestApiException(ErrorCode.NOT_FOUND_ACCORD));
+         List<PerfumeVolume> perfumeVolume = perfumeVolumeRepository.findByPerfume(perfume);
+         if (perfumeVolume.isEmpty()) {
+             throw new RestApiException(ErrorCode.NOT_FOUND_PERFUME_VOLUME);
+         }
+         List<Accord> accords = accordRepository.findAllByPerfume(perfume);
+         if (accords.isEmpty()) {
+             throw new RestApiException(ErrorCode.NOT_FOUND_ACCORD);
+         }
         PerfumeDetail perfumeDetail = perfumeDetailRepository.findByPerfume(perfume).orElseThrow(() -> new RestApiException(ErrorCode.NOT_FOUND_PERFUME_DETAIL));
 
         return PerfumeDetailDto.from(perfume, perfumeVolume, accords, perfumeDetail);

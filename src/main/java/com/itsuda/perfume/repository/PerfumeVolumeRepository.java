@@ -7,5 +7,5 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PerfumeVolumeRepository extends JpaRepository<PerfumeVolume, Long> {
-    Optional<List<PerfumeVolume>> findByPerfume(Perfume perfume);
+     List<PerfumeVolume> findByPerfume(Perfume perfume);
 }
