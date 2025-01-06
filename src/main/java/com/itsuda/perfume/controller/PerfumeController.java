@@ -1,6 +1,7 @@
 package com.itsuda.perfume.controller;
 
 import com.itsuda.perfume.dto.request.PerfumeRequestDto;
+import com.itsuda.perfume.dto.response.PerfumeAccordDto;
 import com.itsuda.perfume.dto.response.PerfumeListDto;
 import com.itsuda.perfume.exception.ResponseDto;
 import com.itsuda.perfume.service.PerfumeService;
@@ -12,6 +13,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,5 +31,11 @@ public class PerfumeController {
     @GetMapping("")
     public ResponseDto<List<PerfumeListDto>> getPerfumes(@ModelAttribute PerfumeRequestDto perfumeRequestDto) {
         return new ResponseDto<>(perfumeService.getPerfumes(perfumeRequestDto));
+    }
+
+    @Operation(summary = "향수 어코드 조회", description = "향수 어코드를 조회합니다.")
+    @GetMapping("/accords")
+    public ResponseDto<List<PerfumeAccordDto>> getAccords() {
+        return new ResponseDto<>(perfumeService.getAccords());
     }
 }
