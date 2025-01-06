@@ -11,9 +11,7 @@ jobs:
 
     steps:
       - name: SSH(원격 접속)으로 EC2에 접속하기
-        uses: appleboy/ssh-action@v1.0.3  # Appleboy가 제공하는 SSH GitHub Action 사용
-        env:
-          SPRING_PROFILE: ${{ secrets.SPRING_PROFILE }} # 활성화할 Spring Boot 프로파일
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
@@ -33,4 +31,4 @@ jobs:
             sudo fuser -k -n tcp 8080 || true
 
             # Spring Boot 애플리케이션 실행 (SPRING_PROFILE 적용)
-            nohup java -jar -Dspring.profiles.active=${SPRING_PROFILE} build/libs/*SNAPSHOT.jar > ./output.log 2>&1 &
+            nohup java -jar -Dspring.profiles.active=${{ secrets.SPRING_PROFILE }} build/libs/*SNAPSHOT.jar > ./output.log 2>&1 &
