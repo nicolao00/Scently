@@ -17,8 +17,13 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script_stop: true
-
           script: |
+            # 환경변수 설정
+            export SPRING_PROFILE="${{ secrets.SPRING_PROFILE }}"
+            export RDS_ENDPOINT="${{ secrets.RDS_ENDPOINT }}"
+            export DB_USERNAME="${{ secrets.DB_USERNAME }}"
+            export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
+
             cd /home/ubuntu/Scently
 
             # 기존 소스 업데이트
@@ -31,4 +36,4 @@ jobs:
             sudo fuser -k -n tcp 8080 || true
 
             # Spring Boot 애플리케이션 실행 (SPRING_PROFILE 적용)
-            nohup java -jar -Dspring.profiles.active=${{ secrets.SPRING_PROFILE }} build/libs/*SNAPSHOT.jar > ./output.log 2>&1 &
+            nohup java -jar -Dspring.profiles.active=$SPRING_PROFILE build/libs/*SNAPSHOT.jar > ./output.log 2>&1 &
